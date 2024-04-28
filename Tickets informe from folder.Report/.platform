@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Tickets informe from folder"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "8d07d236-b457-4e06-8f80-57658f0afc3b"
+  }
+}
