@@ -4,7 +4,7 @@
     "annotations": [
       {
         "name": "PBI_QueryOrder",
-        "value": "[\"f_Tickets\",\"Parameter1\",\"Transform Sample File\",\"Sample File\",\"Transform File\",\"d_Agentes\",\"Planta 2\",\"Planta 1\",\"d_Empleados\",\"Puestos\",\"d_Calendario\",\"DAX Medidas\",\"d_Satisfacción\",\"d_Días\"]"
+        "value": "[\"f_Tickets\",\"Parameter1\",\"Transform Sample File\",\"Sample File\",\"Transform File\",\"d_Agentes\",\"Planta 2\",\"Planta 1\",\"d_Empleados\",\"Puestos\",\"d_Calendario\",\"DAX Medidas\",\"d_Satisfacción\",\"d_Días\",\"FotosAgentes\"]"
       },
       {
         "name": "__PBI_TimeIntelligenceEnabled",
@@ -33,6 +33,7 @@
       }
     ],
     "dataAccessOptions": {
+      "fastCombine": true,
       "legacyRedirects": true,
       "returnErrorValuesAsNull": true
     },
@@ -77,11 +78,15 @@
           {
             "name": "PBI_ResultType",
             "value": "Binary"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "expression": [
           "let",
-          "    Source = Folder.Files(\"G:\\POWER BI\\DATOS\\Tickets\"),",
+          "    Source = Folder.Files(\"G:\\CURSO POWER BI\\POWER BI\\DATOS\\Tickets\"),",
           "    Navigation1 = Source{0}[Content]",
           "in",
           "    Navigation1"
@@ -128,7 +133,7 @@
         ],
         "expression": [
           "let",
-          "    Source = Excel.Workbook(File.Contents(\"G:\\POWER BI\\DATOS\\Lista+Empleados.xlsx\"), null, true),",
+          "    Source = Excel.Workbook(File.Contents(\"G:\\CURSO POWER BI\\POWER BI\\DATOS\\Lista+Empleados.xlsx\"), null, true),",
           "    #\"Planta 2_Sheet\" = Source{[Item=\"Planta 2\",Kind=\"Sheet\"]}[Data],",
           "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Planta 2_Sheet\", [PromoteAllScalars=true]),",
           "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"Turno\", type text}, {\"Lista de empleados de la planta 2\", type any}, {\"Column3\", type text}, {\"Column4\", type text}, {\"Column5\", type text}, {\"Column6\", type text}, {\"Column7\", type any}, {\"Column8\", type text}, {\"Column9\", type date}}),",
@@ -157,7 +162,7 @@
         ],
         "expression": [
           "let",
-          "    Source = Excel.Workbook(File.Contents(\"G:\\POWER BI\\DATOS\\Lista+Empleados.xlsx\"), null, true),",
+          "    Source = Excel.Workbook(File.Contents(\"G:\\CURSO POWER BI\\POWER BI\\DATOS\\Lista+Empleados.xlsx\"), null, true),",
           "    #\"Planta 1_Sheet\" = Source{[Item=\"Planta 1\",Kind=\"Sheet\"]}[Data],",
           "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Planta 1_Sheet\", [PromoteAllScalars=true]),",
           "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"Turno\", type text}, {\"Lista de empleados de la planta 1\", type any}, {\"Column3\", type text}, {\"Column4\", type text}, {\"Column5\", type text}, {\"Column6\", type text}, {\"Column7\", type any}, {\"Column8\", type text}, {\"Column9\", type date}}),",
@@ -186,7 +191,7 @@
         ],
         "expression": [
           "let",
-          "    Source = Excel.Workbook(File.Contents(\"G:\\POWER BI\\DATOS\\Puestos.xlsx\"), null, true),",
+          "    Source = Excel.Workbook(File.Contents(\"G:\\CURSO POWER BI\\POWER BI\\DATOS\\Puestos.xlsx\"), null, true),",
           "    Tabla1_Table = Source{[Item=\"Tabla1\",Kind=\"Table\"]}[Data],",
           "    #\"Changed Type\" = Table.TransformColumnTypes(Tabla1_Table,{{\"ID Puesto\", type text}, {\"Puesto\", type text}, {\"Departamento\", type text}, {\"Tipo Puesto\", type text}}),",
           "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Changed Type\",{{\"Departamento\", Text.Proper, type text}})",
@@ -195,6 +200,35 @@
         ],
         "kind": "m",
         "lineageTag": "08f05e12-0ac5-44a1-a00e-a4a31dbfabf8"
+      },
+      {
+        "name": "FotosAgentes",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Excel.Workbook(Web.Contents(\"https://docs.google.com/spreadsheets/d/e/2PACX-1vSsUO5PgOZBolseJmcRId0rTQN6ybuLN8Q99gLOWJtZbIrsWWMEskKvsiUFZTxwcvXe9GZ_r3J5RbEu/pub?output=xlsx\"), null, true),",
+          "    Sheet1_Sheet = Source{[Item=\"Sheet1\",Kind=\"Sheet\"]}[Data],",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),",
+          "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"ID Agente\", Int64.Type}, {\"URL Dropbox\", type text}, {\"Genero\", type text}}),",
+          "    #\"Inserted Text Before Delimiter\" = Table.AddColumn(#\"Changed Type\", \"Text Before Delimiter\", each Text.BeforeDelimiter([URL Dropbox], \"?dl=0\"), type text),",
+          "    #\"Replaced Value\" = Table.ReplaceValue(#\"Inserted Text Before Delimiter\",\"www\",\"dl\",Replacer.ReplaceText,{\"Text Before Delimiter\"}),",
+          "    #\"Renamed Columns\" = Table.RenameColumns(#\"Replaced Value\",{{\"Text Before Delimiter\", \"URL FOTO\"}}),",
+          "    #\"Replaced Value1\" = Table.ReplaceValue(#\"Renamed Columns\",\"M\",\"Mujer\",Replacer.ReplaceText,{\"Genero\"}),",
+          "    #\"Replaced Value2\" = Table.ReplaceValue(#\"Replaced Value1\",\"H\",\"Hombre\",Replacer.ReplaceText,{\"Genero\"})",
+          "in",
+          "    #\"Replaced Value2\""
+        ],
+        "kind": "m",
+        "lineageTag": "59170463-14cd-4c8e-bf37-5159c8a3effa"
       }
     ],
     "queryGroups": [
@@ -252,6 +286,14 @@
         "fromTable": "f_Tickets",
         "toColumn": "Días Abierto",
         "toTable": "d_Días"
+      },
+      {
+        "name": "d3b6221c-1e27-4b17-a632-0ffb65e34cbb",
+        "fromColumn": "Fecha de Nacimiento",
+        "fromTable": "d_Agentes",
+        "joinOnDateBehavior": "datePartOnly",
+        "toColumn": "Date",
+        "toTable": "LocalDateTable_eaa8a7a0-ab64-4bea-9543-020984fca85a"
       }
     ],
     "sourceQueryCulture": "en-US",
@@ -262,6 +304,10 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -431,7 +477,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Folder.Files(\"G:\\POWER BI\\DATOS\\Tickets\"),",
+                "    Source = Folder.Files(\"G:\\CURSO POWER BI\\POWER BI\\DATOS\\Tickets\"),",
                 "    #\"Filtered Hidden Files1\" = Table.SelectRows(Source, each [Attributes]?[Hidden]? <> true),",
                 "    #\"Invoke Custom Function1\" = Table.AddColumn(#\"Filtered Hidden Files1\", \"Transform File\", each #\"Transform File\"([Content])),",
                 "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Invoke Custom Function1\", {\"Name\", \"Source.Name\"}),",
@@ -704,7 +750,7 @@
             "formatString": "0",
             "lineageTag": "f6624b4c-cc69-4a61-87a0-b284a4555fc7",
             "sourceColumn": "Año",
-            "summarizeBy": "none"
+            "summarizeBy": "sum"
           },
           {
             "name": "Mes",
@@ -718,7 +764,7 @@
             "formatString": "0",
             "lineageTag": "11cbfd11-6723-4f2c-833d-080821562bf4",
             "sourceColumn": "Mes",
-            "summarizeBy": "none"
+            "summarizeBy": "sum"
           },
           {
             "name": "Día",
@@ -732,7 +778,7 @@
             "formatString": "0",
             "lineageTag": "833b6ad7-64bf-4cdc-b097-3ce1f831721d",
             "sourceColumn": "Día",
-            "summarizeBy": "none"
+            "summarizeBy": "sum"
           },
           {
             "name": "Fecha de Nacimiento",
@@ -740,12 +786,28 @@
               {
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
               }
             ],
-            "dataType": "string",
+            "dataType": "dateTime",
+            "formatString": "Long Date",
             "lineageTag": "93963bdd-816d-4d0c-af60-5e8a7fb2619a",
             "sourceColumn": "Fecha de Nacimiento",
-            "summarizeBy": "none"
+            "summarizeBy": "none",
+            "variations": [
+              {
+                "name": "Variation",
+                "defaultHierarchy": {
+                  "hierarchy": "Date Hierarchy",
+                  "table": "LocalDateTable_eaa8a7a0-ab64-4bea-9543-020984fca85a"
+                },
+                "isDefault": true,
+                "relationship": "d3b6221c-1e27-4b17-a632-0ffb65e34cbb"
+              }
+            ]
           },
           {
             "name": "Nombre",
@@ -759,6 +821,60 @@
             "lineageTag": "11e52e45-1be3-4964-a5fc-aad8a985af6a",
             "sourceColumn": "Nombre",
             "summarizeBy": "none"
+          },
+          {
+            "name": "Edad",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "adcfc7fc-0129-45d6-bde5-e0cfd463d8e7",
+            "sourceColumn": "Edad",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Edad grupo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "1d679f8b-7dc5-4d89-8e4b-34f6f746b014",
+            "sourceColumn": "Edad grupo",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Genero",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "75498e8a-6734-4da8-88ac-3589e41bdea6",
+            "sourceColumn": "Genero",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "URL FOTO",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataCategory": "ImageUrl",
+            "dataType": "string",
+            "lineageTag": "66c6e0c4-69d0-4612-834f-40e196c6eb2f",
+            "sourceColumn": "URL FOTO",
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "7047ce76-81a0-4922-9503-0fb1483e198c",
@@ -769,7 +885,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = Excel.Workbook(File.Contents(\"G:\\POWER BI\\DATOS\\Agentes.xlsx\"), null, true),",
+                "    Source = Excel.Workbook(File.Contents(\"G:\\CURSO POWER BI\\POWER BI\\DATOS\\Agentes.xlsx\"), null, true),",
                 "    #\"Agentes de TI_Sheet\" = Source{[Item=\"Agentes de TI\",Kind=\"Sheet\"]}[Data],",
                 "    #\"Removed Top Rows\" = Table.Skip(#\"Agentes de TI_Sheet\",1),",
                 "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Removed Top Rows\", [PromoteAllScalars=true]),",
@@ -780,9 +896,18 @@
                 "    #\"Uppercased Text\" = Table.TransformColumns(#\"Replaced Value\",{{\"Text Before Delimiter\", Text.Upper, type text}}),",
                 "    #\"Removed Columns\" = Table.RemoveColumns(#\"Uppercased Text\",{\"Nombre\"}),",
                 "    #\"Reordered Columns\" = Table.ReorderColumns(#\"Removed Columns\",{\"ID Agente\", \"Text Before Delimiter\", \"email\", \"Año\", \"Mes\", \"Día\", \"Fecha de Nacimiento\"}),",
-                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Reordered Columns\",{{\"Text Before Delimiter\", \"Nombre\"}})",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Reordered Columns\",{{\"Text Before Delimiter\", \"Nombre\"}}),",
+                "    #\"Changed Type with Locale\" = Table.TransformColumnTypes(#\"Renamed Columns\", {{\"Fecha de Nacimiento\", type date}}, \"es-CO\"),",
+                "    #\"Inserted Age\" = Table.AddColumn(#\"Changed Type with Locale\", \"Age\", each Date.From(DateTime.LocalNow()) - [Fecha de Nacimiento], type duration),",
+                "    #\"Calculated Total Years\" = Table.TransformColumns(#\"Inserted Age\",{{\"Age\", each Duration.TotalDays(_) / 365, type number}}),",
+                "    #\"Rounded Down\" = Table.TransformColumns(#\"Calculated Total Years\",{{\"Age\", Number.RoundDown, Int64.Type}}),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Rounded Down\",{{\"Age\", \"Edad\"}}),",
+                "    #\"Added Conditional Column\" = Table.AddColumn(#\"Renamed Columns1\", \"Edad grupo\", each if [Edad] < 30 then \"20-29\" else if [Edad] < 40 then \"30-39\" else \"40+\"),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Added Conditional Column\",{{\"Edad grupo\", type text}}),",
+                "    #\"Merged Queries\" = Table.NestedJoin(#\"Changed Type1\", {\"ID Agente\"}, FotosAgentes, {\"ID Agente\"}, \"FotosAgentes\", JoinKind.LeftOuter),",
+                "    #\"Expanded FotosAgentes\" = Table.ExpandTableColumn(#\"Merged Queries\", \"FotosAgentes\", {\"Genero\", \"URL FOTO\"}, {\"Genero\", \"URL FOTO\"})",
                 "in",
-                "    #\"Renamed Columns\""
+                "    #\"Expanded FotosAgentes\""
               ],
               "type": "m"
             }
@@ -795,11 +920,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          }
-        ],
-        "changedProperties": [
-          {
-            "property": "Name"
           }
         ],
         "columns": [
@@ -1350,6 +1470,42 @@
             "name": "Tickets por Agente Var Grupo",
             "expression": "IF([Tickets por Agente Variacion]>=0,\"Arriba de promedio\",\"Debajo de promedio\")",
             "lineageTag": "5cc2e4b6-c499-4f2b-8f18-de5efd1bc43c"
+          },
+          {
+            "name": "Rank Tickets",
+            "expression": "RANKX(ALL(d_Agentes),[Total Tickets])",
+            "formatString": "0",
+            "lineageTag": "7b6afd5d-565e-411f-8fd9-22de9acda4c1"
+          },
+          {
+            "name": "Rank Tickets ALLS",
+            "expression": "RANKX(ALLSELECTED(d_Agentes),[Total Tickets])",
+            "formatString": "0",
+            "lineageTag": "b7d8390e-a384-4c7a-8e2a-d8842d411fca"
+          },
+          {
+            "name": "Rank Satisfaccion",
+            "expression": "RANKX(ALL(d_Agentes),[Promedio Sastifacción])",
+            "formatString": "0",
+            "lineageTag": "bb09b25f-8fd9-427e-9edf-b12cca2fa5a5"
+          },
+          {
+            "name": "Rank Días",
+            "expression": "RANKX(ALL(d_Agentes),[Promedio Días Abierto],,ASC)",
+            "formatString": "0",
+            "lineageTag": "f18cd5cf-107a-4271-a22d-5faf7ea6c816"
+          },
+          {
+            "name": "Rank Total",
+            "expression": "[Rank Tickets]+[Rank Satisfaccion]+[Rank Días]",
+            "formatString": "0",
+            "lineageTag": "ddaac9e8-ef52-48ff-9109-fe985ff49eb1"
+          },
+          {
+            "name": "Rank Final",
+            "expression": "RANKX(ALL(d_Agentes),[Rank Total],,ASC)",
+            "formatString": "0",
+            "lineageTag": "200fa6de-71f4-49a1-91ec-793531e90ed5"
           }
         ],
         "partitions": [
@@ -1462,17 +1618,8 @@
         "name": "d_Días",
         "annotations": [
           {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
-          {
             "name": "PBI_ResultType",
             "value": "Table"
-          }
-        ],
-        "changedProperties": [
-          {
-            "property": "Name"
           }
         ],
         "columns": [
@@ -1561,6 +1708,207 @@
             }
           }
         ]
+      },
+      {
+        "name": "LocalDateTable_eaa8a7a0-ab64-4bea-9543-020984fca85a",
+        "annotations": [
+          {
+            "name": "__PBI_LocalDateTable",
+            "value": "true"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "2eea216c-01f4-435b-a9ee-bbd733dca2b7",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "isHidden": true,
+            "lineageTag": "0ea5db51-08d0-4967-8902-7774ae4105b2",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "isHidden": true,
+            "lineageTag": "11418061-7c3b-467f-9228-e62831ee85f4",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "45a99ba2-183d-49e0-9b55-c46b24c9337b",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "isHidden": true,
+            "lineageTag": "9a5bc60b-3adb-4911-9db8-117e0dd14242",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "71b3165b-9220-491b-ad3f-71f9906adfb8",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "isHidden": true,
+            "lineageTag": "68ad1e8c-40cd-4143-afeb-d603d4b73f3f",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "129366cf-a629-4154-b424-dffba777e95c",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "fa2429f3-3d14-4b40-b209-d1ddb5d1b165",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "6c4cc847-7ed2-42ab-8e2f-2e1b4f2d2c1e",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "e0037d50-f78c-4685-b91e-f476ea7ecd2d",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "f7f5c1c0-94ec-416a-a37d-fc3f5cd7389f"
+          }
+        ],
+        "isHidden": true,
+        "lineageTag": "302b0bfd-17ef-4e78-83e7-e47b9a8279b1",
+        "partitions": [
+          {
+            "name": "LocalDateTable_eaa8a7a0-ab64-4bea-9543-020984fca85a",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(Year(MIN('d_Agentes'[Fecha de Nacimiento])), 1, 1), Date(Year(MAX('d_Agentes'[Fecha de Nacimiento])), 12, 31))",
+              "type": "calculated"
+            }
+          }
+        ],
+        "showAsVariationsOnly": true
       }
     ]
   }
