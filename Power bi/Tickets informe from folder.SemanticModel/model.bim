@@ -1,0 +1,1844 @@
+{
+  "compatibilityLevel": 1567,
+  "model": {
+    "annotations": [
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"f_Tickets\",\"Parameter1\",\"Transform Sample File\",\"Sample File\",\"Transform File\",\"d_Agentes\",\"Planta 2\",\"Planta 1\",\"d_Empleados\",\"Puestos\",\"d_Calendario\",\"DAX Medidas\",\"d_Satisfacción\",\"d_Días\"]"
+      },
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "1"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.128.1177.0 (24.04)"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      }
+    ],
+    "culture": "en-US",
+    "cultures": [
+      {
+        "name": "en-US",
+        "linguisticMetadata": {
+          "content": {
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "expressions": [
+      {
+        "name": "Parameter1",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Binary"
+          }
+        ],
+        "expression": "#\"Sample File\" meta [IsParameterQuery=true, BinaryIdentifier=#\"Sample File\", Type=\"Binary\", IsParameterQueryRequired=true]",
+        "kind": "m",
+        "lineageTag": "dd0871cb-afba-4735-8eda-0d2e5d06ca1e",
+        "queryGroup": "Transform File from Tickets\\Helper Queries"
+      },
+      {
+        "name": "Transform Sample File",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Excel.Workbook(Parameter1, null, true),",
+          "    TicketsTI_Sheet = Source{[Item=\"TicketsTI\",Kind=\"Sheet\"]}[Data],",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(TicketsTI_Sheet, [PromoteAllScalars=true])",
+          "in",
+          "    #\"Promoted Headers\""
+        ],
+        "kind": "m",
+        "lineageTag": "f1ca192b-56c6-4ff1-8843-a34d3fd81dea",
+        "queryGroup": "Transform File from Tickets"
+      },
+      {
+        "name": "Sample File",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Binary"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Folder.Files(\"G:\\CURSO POWER BI\\POWER BI\\DATOS\\Tickets\"),",
+          "    Navigation1 = Source{0}[Content]",
+          "in",
+          "    Navigation1"
+        ],
+        "kind": "m",
+        "lineageTag": "13af1831-9a96-44dc-8780-6a99cc672fcc",
+        "queryGroup": "Transform File from Tickets\\Helper Queries"
+      },
+      {
+        "name": "Transform File",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Function"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = (Parameter1 as binary) => let",
+          "    Source = Excel.Workbook(Parameter1, null, true),",
+          "    TicketsTI_Sheet = Source{[Item=\"TicketsTI\",Kind=\"Sheet\"]}[Data],",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(TicketsTI_Sheet, [PromoteAllScalars=true])",
+          "in",
+          "    #\"Promoted Headers\"",
+          "in",
+          "    Source"
+        ],
+        "kind": "m",
+        "lineageTag": "947c622a-8632-40ba-8551-9a58a9eb7637",
+        "mAttributes": "[ FunctionQueryBinding = \"{\"\"exemplarFormulaName\"\":\"\"Transform Sample File\"\"}\" ]",
+        "queryGroup": "Transform File from Tickets\\Helper Queries"
+      },
+      {
+        "name": "Planta 2",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Excel.Workbook(File.Contents(\"G:\\CURSO POWER BI\\POWER BI\\DATOS\\Lista+Empleados.xlsx\"), null, true),",
+          "    #\"Planta 2_Sheet\" = Source{[Item=\"Planta 2\",Kind=\"Sheet\"]}[Data],",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Planta 2_Sheet\", [PromoteAllScalars=true]),",
+          "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"Turno\", type text}, {\"Lista de empleados de la planta 2\", type any}, {\"Column3\", type text}, {\"Column4\", type text}, {\"Column5\", type text}, {\"Column6\", type text}, {\"Column7\", type any}, {\"Column8\", type text}, {\"Column9\", type date}}),",
+          "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Changed Type\",{\"Turno\", \"Lista de empleados de la planta 2\", \"Column3\", \"Column4\", \"Column5\", \"Column6\"}),",
+          "    #\"Removed Top Rows\" = Table.Skip(#\"Removed Other Columns\",5),",
+          "    #\"Promoted Headers1\" = Table.PromoteHeaders(#\"Removed Top Rows\", [PromoteAllScalars=true]),",
+          "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Promoted Headers1\",{{\"Turno\", type text}, {\"ID Empleado\", Int64.Type}, {\"Apellido\", type text}, {\"Nombre\", type text}, {\"ID Puesto\", type text}, {\"Email\", type text}}),",
+          "    #\"Added Custom\" = Table.AddColumn(#\"Changed Type1\", \"Planta\", each \"2\")",
+          "in",
+          "    #\"Added Custom\""
+        ],
+        "kind": "m",
+        "lineageTag": "d2b9503a-3b4a-470d-85a9-35ffe5245525"
+      },
+      {
+        "name": "Planta 1",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Excel.Workbook(File.Contents(\"G:\\CURSO POWER BI\\POWER BI\\DATOS\\Lista+Empleados.xlsx\"), null, true),",
+          "    #\"Planta 1_Sheet\" = Source{[Item=\"Planta 1\",Kind=\"Sheet\"]}[Data],",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Planta 1_Sheet\", [PromoteAllScalars=true]),",
+          "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"Turno\", type text}, {\"Lista de empleados de la planta 1\", type any}, {\"Column3\", type text}, {\"Column4\", type text}, {\"Column5\", type text}, {\"Column6\", type text}, {\"Column7\", type any}, {\"Column8\", type text}, {\"Column9\", type date}}),",
+          "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Changed Type\",{\"Turno\", \"Lista de empleados de la planta 1\", \"Column3\", \"Column4\", \"Column5\", \"Column6\"}),",
+          "    #\"Removed Top Rows\" = Table.Skip(#\"Removed Other Columns\",5),",
+          "    #\"Promoted Headers1\" = Table.PromoteHeaders(#\"Removed Top Rows\", [PromoteAllScalars=true]),",
+          "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Promoted Headers1\",{{\"Turno\", type text}, {\"ID Empleado\", Int64.Type}, {\"Apellido\", type text}, {\"Nombre\", type text}, {\"ID Puesto\", type text}, {\"Email\", type text}}),",
+          "    #\"Added Custom\" = Table.AddColumn(#\"Changed Type1\", \"Planta\", each \"1\")",
+          "in",
+          "    #\"Added Custom\""
+        ],
+        "kind": "m",
+        "lineageTag": "476c290b-076e-484a-a3cd-be8038343db2"
+      },
+      {
+        "name": "Puestos",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Excel.Workbook(File.Contents(\"G:\\CURSO POWER BI\\POWER BI\\DATOS\\Puestos.xlsx\"), null, true),",
+          "    Tabla1_Table = Source{[Item=\"Tabla1\",Kind=\"Table\"]}[Data],",
+          "    #\"Changed Type\" = Table.TransformColumnTypes(Tabla1_Table,{{\"ID Puesto\", type text}, {\"Puesto\", type text}, {\"Departamento\", type text}, {\"Tipo Puesto\", type text}}),",
+          "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Changed Type\",{{\"Departamento\", Text.Proper, type text}})",
+          "in",
+          "    #\"Capitalized Each Word\""
+        ],
+        "kind": "m",
+        "lineageTag": "08f05e12-0ac5-44a1-a00e-a4a31dbfabf8"
+      }
+    ],
+    "queryGroups": [
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "0"
+          }
+        ],
+        "folder": "Transform File from Tickets"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "0"
+          }
+        ],
+        "folder": "Transform File from Tickets\\Helper Queries"
+      }
+    ],
+    "relationships": [
+      {
+        "name": "dcc5941c-2afe-4c6a-a898-d49b3163a129",
+        "fromColumn": "ID Agente",
+        "fromTable": "f_Tickets",
+        "toColumn": "ID Agente",
+        "toTable": "d_Agentes"
+      },
+      {
+        "name": "0beab465-32bb-4cdc-85e7-83208527b9ab",
+        "fromColumn": "ID Empleado",
+        "fromTable": "f_Tickets",
+        "toColumn": "ID Empleado",
+        "toTable": "d_Empleados"
+      },
+      {
+        "name": "3b287050-c35e-428e-860f-e0498d53b7c1",
+        "fromColumn": "Fecha",
+        "fromTable": "f_Tickets",
+        "toColumn": "Fecha",
+        "toTable": "d_Calendario"
+      },
+      {
+        "name": "a2f6270e-799e-4f81-9798-b5fedbc5a7ac",
+        "fromColumn": "Satisfacción",
+        "fromTable": "f_Tickets",
+        "toColumn": "Satisfacción",
+        "toTable": "d_Satisfacción"
+      },
+      {
+        "name": "ae968c78-2d86-4bcb-b0f9-5fb06a18b529",
+        "fromColumn": "Días Resolución",
+        "fromTable": "f_Tickets",
+        "toColumn": "Días Abierto",
+        "toTable": "d_Días"
+      },
+      {
+        "name": "d3b6221c-1e27-4b17-a632-0ffb65e34cbb",
+        "fromColumn": "Fecha de Nacimiento",
+        "fromTable": "d_Agentes",
+        "joinOnDateBehavior": "datePartOnly",
+        "toColumn": "Date",
+        "toTable": "LocalDateTable_eaa8a7a0-ab64-4bea-9543-020984fca85a"
+      }
+    ],
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "f_Tickets",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "ID Ticket",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "string",
+            "isHidden": true,
+            "lineageTag": "0780aec3-38b0-480a-8745-e3ae084a7aa4",
+            "sourceColumn": "ID Ticket",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Fecha",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "7031a576-ead1-4fc7-8376-8bcafb9bf04a",
+            "sourceColumn": "Fecha",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ID Empleado",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "32f0e15d-c304-43d7-be98-39e8d0982979",
+            "sourceColumn": "ID Empleado",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ID Agente",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "5c594f27-8188-4745-b7fe-f81c6e1dca6c",
+            "sourceColumn": "ID Agente",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Categoría",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d2b8b522-855e-4b77-8b74-ceab6c6179c8",
+            "sourceColumn": "Categoría",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Tipo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "eda3af2f-df2d-46b1-9a90-557de24f470a",
+            "sourceColumn": "Tipo",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Severidad",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6c3db134-87cc-48c5-9f8f-4d0b66726eb9",
+            "sourceColumn": "Severidad",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Prioridad",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "523516dc-f805-41c7-bd5a-1b3d3bbaab2d",
+            "sourceColumn": "Prioridad",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Días Resolución",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "9ef6f2a2-c4d3-4c7a-94c1-d25c5b0d2be3",
+            "sourceColumn": "Días Resolución",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Satisfacción",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "b29f4ec9-f515-461f-ab6c-f63c1f33c745",
+            "sourceColumn": "Satisfacción",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "c1f498de-259a-4c03-81d9-56f7c3fcc63d",
+        "partitions": [
+          {
+            "name": "f_Tickets",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Folder.Files(\"G:\\CURSO POWER BI\\POWER BI\\DATOS\\Tickets\"),",
+                "    #\"Filtered Hidden Files1\" = Table.SelectRows(Source, each [Attributes]?[Hidden]? <> true),",
+                "    #\"Invoke Custom Function1\" = Table.AddColumn(#\"Filtered Hidden Files1\", \"Transform File\", each #\"Transform File\"([Content])),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Invoke Custom Function1\", {\"Name\", \"Source.Name\"}),",
+                "    #\"Removed Other Columns1\" = Table.SelectColumns(#\"Renamed Columns1\", {\"Source.Name\", \"Transform File\"}),",
+                "    #\"Expanded Table Column1\" = Table.ExpandTableColumn(#\"Removed Other Columns1\", \"Transform File\", Table.ColumnNames(#\"Transform File\"(#\"Sample File\"))),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Expanded Table Column1\",{{\"Source.Name\", type text}, {\"ID Ticket\", type text}, {\"Fecha\", type date}, {\"ID Empleado\", Int64.Type}, {\"ID Agente\", Int64.Type}, {\"Categoría\", type text}, {\"Tipo\", type text}, {\"Severidad\", type text}, {\"Prioridad\", type text}, {\"Días Resolución\", Int64.Type}, {\"Satisfacción\", Int64.Type}}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Changed Type\",{\"Source.Name\"})",
+                "in",
+                "    #\"Removed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "DateTableTemplate_eded2895-92f4-45ee-ad8a-d740f2472ed5",
+        "annotations": [
+          {
+            "name": "__PBI_TemplateDateTable",
+            "value": "true"
+          },
+          {
+            "name": "DefaultItem",
+            "value": "DateHierarchy"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "c53871b9-6e6b-42c7-a4a4-88a5d2c9d29a",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "isHidden": true,
+            "lineageTag": "10a6c603-ac4b-4138-834f-dcc13a26b3e7",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "isHidden": true,
+            "lineageTag": "c8bbbdbb-1bff-40e7-a12c-6e5bef26a061",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "728dac89-d810-4a4b-a4e5-a4235a140c3e",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "isHidden": true,
+            "lineageTag": "eafe95dd-be1d-4d58-8f78-05e3032609df",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "28af26d6-5ab6-4a8a-92d7-f3c6af54ab9a",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "isHidden": true,
+            "lineageTag": "9fb41777-81f2-498d-b488-79c4013446e0",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "6ee11b67-7e0a-4fdc-a348-64bb34f2e506",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "b3ff8b5e-d0dd-4ae1-aba5-223a7c0a2644",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "e84dd5c0-1606-45fa-9238-c6cfde65db24",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "e834d091-6ec3-4e6a-803a-fbba9e883321",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "f4726dc6-84ff-482a-b5d9-688b35d2397d"
+          }
+        ],
+        "isHidden": true,
+        "isPrivate": true,
+        "lineageTag": "adc66611-cfb3-4d7d-a6bc-9f777dcb0a37",
+        "partitions": [
+          {
+            "name": "DateTableTemplate_eded2895-92f4-45ee-ad8a-d740f2472ed5",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(2015,1,1), Date(2015,1,1))",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "d_Agentes",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "ID Agente",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "a5bc87d9-af60-45ca-9c10-d414466c7886",
+            "sourceColumn": "ID Agente",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "email",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "612fa89a-9edd-4942-b7f7-ceaf0352e167",
+            "sourceColumn": "email",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Año",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "f6624b4c-cc69-4a61-87a0-b284a4555fc7",
+            "sourceColumn": "Año",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Mes",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "11cbfd11-6723-4f2c-833d-080821562bf4",
+            "sourceColumn": "Mes",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Día",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "833b6ad7-64bf-4cdc-b097-3ce1f831721d",
+            "sourceColumn": "Día",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Fecha de Nacimiento",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "93963bdd-816d-4d0c-af60-5e8a7fb2619a",
+            "sourceColumn": "Fecha de Nacimiento",
+            "summarizeBy": "none",
+            "variations": [
+              {
+                "name": "Variation",
+                "defaultHierarchy": {
+                  "hierarchy": "Date Hierarchy",
+                  "table": "LocalDateTable_eaa8a7a0-ab64-4bea-9543-020984fca85a"
+                },
+                "isDefault": true,
+                "relationship": "d3b6221c-1e27-4b17-a632-0ffb65e34cbb"
+              }
+            ]
+          },
+          {
+            "name": "Nombre",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "11e52e45-1be3-4964-a5fc-aad8a985af6a",
+            "sourceColumn": "Nombre",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Edad",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "adcfc7fc-0129-45d6-bde5-e0cfd463d8e7",
+            "sourceColumn": "Edad",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Edad grupo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "1d679f8b-7dc5-4d89-8e4b-34f6f746b014",
+            "sourceColumn": "Edad grupo",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "7047ce76-81a0-4922-9503-0fb1483e198c",
+        "partitions": [
+          {
+            "name": "d_Agentes",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Excel.Workbook(File.Contents(\"G:\\CURSO POWER BI\\POWER BI\\DATOS\\Agentes.xlsx\"), null, true),",
+                "    #\"Agentes de TI_Sheet\" = Source{[Item=\"Agentes de TI\",Kind=\"Sheet\"]}[Data],",
+                "    #\"Removed Top Rows\" = Table.Skip(#\"Agentes de TI_Sheet\",1),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Removed Top Rows\", [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"ID Agente\", Int64.Type}, {\"Nombre\", type text}, {\"email\", type text}, {\"Año\", Int64.Type}, {\"Mes\", Int64.Type}, {\"Día\", Int64.Type}}),",
+                "    #\"Inserted Merged Column\" = Table.AddColumn(#\"Changed Type\", \"Fecha de Nacimiento\", each Text.Combine({Text.From([Día], \"en-US\"), Text.From([Mes], \"en-US\"), Text.From([Año], \"en-US\")}, \"/\"), type text),",
+                "    #\"Inserted Text Before Delimiter\" = Table.AddColumn(#\"Inserted Merged Column\", \"Text Before Delimiter\", each Text.BeforeDelimiter([email], \"@\"), type text),",
+                "    #\"Replaced Value\" = Table.ReplaceValue(#\"Inserted Text Before Delimiter\",\".\",\" \",Replacer.ReplaceText,{\"Text Before Delimiter\"}),",
+                "    #\"Uppercased Text\" = Table.TransformColumns(#\"Replaced Value\",{{\"Text Before Delimiter\", Text.Upper, type text}}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Uppercased Text\",{\"Nombre\"}),",
+                "    #\"Reordered Columns\" = Table.ReorderColumns(#\"Removed Columns\",{\"ID Agente\", \"Text Before Delimiter\", \"email\", \"Año\", \"Mes\", \"Día\", \"Fecha de Nacimiento\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Reordered Columns\",{{\"Text Before Delimiter\", \"Nombre\"}}),",
+                "    #\"Changed Type with Locale\" = Table.TransformColumnTypes(#\"Renamed Columns\", {{\"Fecha de Nacimiento\", type date}}, \"es-CO\"),",
+                "    #\"Inserted Age\" = Table.AddColumn(#\"Changed Type with Locale\", \"Age\", each Date.From(DateTime.LocalNow()) - [Fecha de Nacimiento], type duration),",
+                "    #\"Calculated Total Years\" = Table.TransformColumns(#\"Inserted Age\",{{\"Age\", each Duration.TotalDays(_) / 365, type number}}),",
+                "    #\"Rounded Down\" = Table.TransformColumns(#\"Calculated Total Years\",{{\"Age\", Number.RoundDown, Int64.Type}}),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Rounded Down\",{{\"Age\", \"Edad\"}}),",
+                "    #\"Added Conditional Column\" = Table.AddColumn(#\"Renamed Columns1\", \"Edad grupo\", each if [Edad] < 30 then \"20-29\" else if [Edad] < 40 then \"30-39\" else \"40+\"),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Added Conditional Column\",{{\"Edad grupo\", type text}})",
+                "in",
+                "    #\"Changed Type1\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "d_Empleados",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Turno",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "4d90b06d-0104-4ee5-9900-4e0d9037c7bb",
+            "sourceColumn": "Turno",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ID Empleado",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "e4f72bee-cc9d-48bb-acf6-458889ed6750",
+            "sourceColumn": "ID Empleado",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Nombre",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a37ae908-d53e-47e6-934f-5b9da571c15a",
+            "sourceColumn": "Nombre",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Email",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b8c6c793-c87c-428e-a3b4-dcb6959a7269",
+            "sourceColumn": "Email",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Planta",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "1419704d-ea0d-40d3-9b00-965cabb1ed62",
+            "sourceColumn": "Planta",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Puesto",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "0502c752-e38c-42c7-ac20-b005c0011504",
+            "sourceColumn": "Puesto",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Departamento",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7263692d-413c-4f6f-826f-42652ff1f242",
+            "sourceColumn": "Departamento",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Tipo Puesto",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "17086dcb-da8d-45b6-a556-f09145d862bb",
+            "sourceColumn": "Tipo Puesto",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "fa7cd083-1a39-4699-a644-a297cae03139",
+        "partitions": [
+          {
+            "name": "d_Empleados",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.Combine({#\"Planta 1\", #\"Planta 2\"}),",
+                "    #\"Filled Down\" = Table.FillDown(Source,{\"Turno\"}),",
+                "    #\"Merged Columns\" = Table.CombineColumns(#\"Filled Down\",{\"Nombre\", \"Apellido\"},Combiner.CombineTextByDelimiter(\" \", QuoteStyle.None),\"Nombre.1\"),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Merged Columns\",{{\"Nombre.1\", \"Nombre\"}}),",
+                "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Renamed Columns\",{{\"Nombre\", Text.Proper, type text}}),",
+                "    #\"Merged Queries\" = Table.NestedJoin(#\"Capitalized Each Word\", {\"ID Puesto\"}, Puestos, {\"ID Puesto\"}, \"Puestos\", JoinKind.LeftOuter),",
+                "    #\"Expanded Puestos\" = Table.ExpandTableColumn(#\"Merged Queries\", \"Puestos\", {\"Puesto\", \"Departamento\", \"Tipo Puesto\"}, {\"Puesto\", \"Departamento\", \"Tipo Puesto\"}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Expanded Puestos\",{\"ID Puesto\"})",
+                "in",
+                "    #\"Removed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "d_Calendario",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Fecha",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "isKey": true,
+            "lineageTag": "d1607fef-da81-4eba-ae99-53241d329cbc",
+            "sourceColumn": "Fecha",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "#Año",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "42cffbda-b56f-4085-916e-e7e886bfdb94",
+            "sourceColumn": "#Año",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "#Mes",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "c008fadc-0b9b-41cc-9850-1693ee9ffcd0",
+            "sourceColumn": "#Mes",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Mes",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "SortByColumn"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "df320b80-d34d-4a5a-92d6-fbde4b5cad5f",
+            "sortByColumn": "#Mes",
+            "sourceColumn": "Mes",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "#Trimestre",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "26eec586-0456-45ef-b90d-a5b926cdf663",
+            "sourceColumn": "#Trimestre",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "#SemanaAño",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "c2a10386-95e9-433e-a3ad-fd63e4e9fd52",
+            "sourceColumn": "#SemanaAño",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "#SemanaMes",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "ccb9a5ee-5752-4bbf-a21b-ef7233c2d096",
+            "sourceColumn": "#SemanaMes",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "#Día",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "56f03c5d-2780-4d88-8095-1fe77867f8d2",
+            "sourceColumn": "#Día",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "#DíaSemana",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "double",
+            "formatString": "0",
+            "lineageTag": "7257dc9f-c953-419b-9fa6-ac6a41137503",
+            "sourceColumn": "#DíaSemana",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "#DíaAño",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "b5051cf4-03f6-45bd-b301-51448728db1c",
+            "sourceColumn": "#DíaAño",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Día",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "SortByColumn"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f95db320-e915-49ae-a4e3-3c978ae6ce93",
+            "sortByColumn": "#DíaSemana",
+            "sourceColumn": "Día",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Mes corto",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "SortByColumn"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b98fae75-534a-4188-9cbd-eadfd5b19a4c",
+            "sortByColumn": "#Mes",
+            "sourceColumn": "Mes corto",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Día corto",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "SortByColumn"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "1c55ca5e-16db-4424-b143-395cfc308bbe",
+            "sortByColumn": "#DíaSemana",
+            "sourceColumn": "Día corto",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Semestre",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "1721fb59-aa0d-463d-8d1a-aa70200f45d0",
+            "sourceColumn": "Semestre",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Día Laboral",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b7273e03-6a00-4773-a357-5dc8be2c18f9",
+            "sourceColumn": "Día Laboral",
+            "summarizeBy": "none"
+          }
+        ],
+        "dataCategory": "Time",
+        "lineageTag": "05d10910-e60b-4c06-ac6d-0590a0b6e6c6",
+        "partitions": [
+          {
+            "name": "d_Calendario",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = f_Tickets[Fecha],",
+                "    FechaMin = #date(",
+                "     Date.Year(List.Min(Source)),01,01),",
+                "    FechaMax = #date(",
+                "     Date.Year(List.Max(Source)),12,31),",
+                "    Custom1 = {Number.From(FechaMin)..Number.From(FechaMax)},",
+                "    #\"Converted to Table\" = Table.FromList(Custom1, Splitter.SplitByNothing(), null, null, ExtraValues.Error),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Converted to Table\",{{\"Column1\", type date}}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Changed Type\",{{\"Column1\", \"Fecha\"}}),",
+                "    #\"Inserted Year\" = Table.AddColumn(#\"Renamed Columns\", \"Year\", each Date.Year([Fecha]), Int64.Type),",
+                "    #\"Inserted Month\" = Table.AddColumn(#\"Inserted Year\", \"Month\", each Date.Month([Fecha]), Int64.Type),",
+                "    #\"Inserted Month Name\" = Table.AddColumn(#\"Inserted Month\", \"Month Name\", each Date.MonthName([Fecha]), type text),",
+                "    #\"Inserted Quarter\" = Table.AddColumn(#\"Inserted Month Name\", \"Quarter\", each Date.QuarterOfYear([Fecha]), Int64.Type),",
+                "    #\"Inserted Week of Year\" = Table.AddColumn(#\"Inserted Quarter\", \"Week of Year\", each Date.WeekOfYear([Fecha]), Int64.Type),",
+                "    #\"Inserted Week of Month\" = Table.AddColumn(#\"Inserted Week of Year\", \"Week of Month\", each Date.WeekOfMonth([Fecha]), Int64.Type),",
+                "    #\"Inserted Day\" = Table.AddColumn(#\"Inserted Week of Month\", \"Day\", each Date.Day([Fecha]), Int64.Type),",
+                "    #\"Inserted Day of Week\" = Table.AddColumn(#\"Inserted Day\", \"Day of Week\", each Date.DayOfWeek([Fecha]), Int64.Type),",
+                "    #\"Inserted Day of Year\" = Table.AddColumn(#\"Inserted Day of Week\", \"Day of Year\", each Date.DayOfYear([Fecha]), Int64.Type),",
+                "    #\"Inserted Day Name\" = Table.AddColumn(#\"Inserted Day of Year\", \"Day Name\", each Date.DayOfWeekName([Fecha]), type text),",
+                "    #\"Replaced Value\" = Table.ReplaceValue(#\"Inserted Day Name\",0,7,Replacer.ReplaceValue,{\"Day of Week\"}),",
+                "    #\"Inserted First Characters\" = Table.AddColumn(#\"Replaced Value\", \"First Characters\", each Text.Start([Month Name], 3), type text),",
+                "    #\"Inserted First Characters1\" = Table.AddColumn(#\"Inserted First Characters\", \"First Characters.1\", each Text.Start([Day Name], 3), type text),",
+                "    #\"Added Conditional Column\" = Table.AddColumn(#\"Inserted First Characters1\", \"Semestre\", each if [Month] <= 6 then 1 else if [Month] <= 12 then 2 else null),",
+                "    #\"Added Conditional Column1\" = Table.AddColumn(#\"Added Conditional Column\", \"Día Laboral\", each if [Day of Week] <= 5 then \"Día Laboral\" else if [Day of Week] <= 7 then \"Fin de Semana\" else null),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Added Conditional Column1\",{{\"Year\", \"#Año\"}, {\"Month\", \"#Mes\"}, {\"Month Name\", \"Mes\"}, {\"Quarter\", \"#Trimestre\"}, {\"Week of Year\", \"#SemanaAño\"}, {\"Week of Month\", \"#SemanaMes\"}, {\"Day\", \"#Día\"}, {\"Day of Week\", \"#DíaSemana\"}, {\"Day of Year\", \"#DíaAño\"}, {\"Day Name\", \"Día\"}, {\"First Characters\", \"Mes corto\"}, {\"First Characters.1\", \"Día corto\"}})",
+                "in",
+                "    #\"Renamed Columns1\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "DAX Medidas",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "lineageTag": "f7855455-ffbb-44cc-a916-3d9dfe0796fa",
+        "measures": [
+          {
+            "name": "Total Tickets",
+            "expression": "IF(ISBLANK(COUNTROWS(f_Tickets)),0,COUNTROWS(f_Tickets))",
+            "formatString": "0",
+            "lineageTag": "9fec5657-c9f5-40e5-9785-db962e0552c5"
+          },
+          {
+            "name": "Total Tickets NoBlank",
+            "expression": "COUNTROWS(f_Tickets)",
+            "formatString": "0",
+            "lineageTag": "94a066e4-7e4c-4e15-a1b0-dc50fd5e5324"
+          },
+          {
+            "name": "Promedio Sastifacción",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "AVERAGE(f_Tickets[Satisfacción])",
+            "lineageTag": "29ff8ad6-a32c-48ee-bba7-a155126a1738"
+          },
+          {
+            "name": "Promedio Días Abierto",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "AVERAGE(f_Tickets[Días Resolución])",
+            "lineageTag": "86e76791-5dc3-49b4-a4be-067fd07da5a5"
+          },
+          {
+            "name": "Total Agentes",
+            "expression": "COUNTROWS(d_Agentes)",
+            "formatString": "0",
+            "lineageTag": "867813e1-7c86-4863-bd8a-acc475ce1826"
+          },
+          {
+            "name": "Tickets por Agentes",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isDecimal\":true}"
+              }
+            ],
+            "expression": "ROUND(DIVIDE([Total Tickets],[Total Agentes],0),0)",
+            "formatString": "0",
+            "lineageTag": "c5fea1a3-675d-443c-bb42-eafbba6cae4d"
+          },
+          {
+            "name": "Total Tickets Positivos",
+            "expression": "CALCULATE([Total Tickets],'d_Satisfacción'[Estatus] = \"Positivo\")",
+            "formatString": "0",
+            "lineageTag": "94450cdf-f7c0-426f-a284-d25ad056bace"
+          },
+          {
+            "name": "% Positivo",
+            "expression": "DIVIDE([Total Tickets Positivos],[Total Tickets],0)",
+            "formatString": "0%;-0%;0%",
+            "lineageTag": "3d3b3c87-2821-47b8-aecb-039b5568f81a"
+          },
+          {
+            "name": "Total Tickets Problemas",
+            "expression": "CALCULATE([Total Tickets],f_Tickets[Tipo] = \"Problema\")",
+            "formatString": "0",
+            "lineageTag": "7bc89447-afbd-46be-931b-551cedb0e8e1"
+          },
+          {
+            "name": "% Problema",
+            "expression": "DIVIDE([Total Tickets Problemas],[Total Tickets],0)",
+            "formatString": "0%;-0%;0%",
+            "lineageTag": "0e3efadb-7108-4887-8b2e-8725200be5e4"
+          },
+          {
+            "name": "Total Tickets ALL",
+            "expression": "CALCULATE([Total Tickets],ALL(f_Tickets))",
+            "formatString": "0",
+            "lineageTag": "c30bbb78-3bf6-4d8f-984a-04a3a2cafd71"
+          },
+          {
+            "name": "Total Tickets ALLSELECTED",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isDecimal\":true}"
+              }
+            ],
+            "expression": "CALCULATE([Total Tickets],ALLSELECTED(f_Tickets))",
+            "formatString": "0",
+            "lineageTag": "83707f70-e2d0-4f4b-a9b4-72305a1d68a7"
+          },
+          {
+            "name": "Tickets por Angente ALLSELECTED",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isDecimal\":true}"
+              }
+            ],
+            "expression": "CALCULATE([Tickets por Agentes],ALLSELECTED(f_Tickets))",
+            "formatString": "0",
+            "lineageTag": "9dec126c-373d-4f23-9e8a-1984316f1064"
+          },
+          {
+            "name": "Tickets por Agente Variacion",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isDecimal\":true}"
+              }
+            ],
+            "expression": "[Total Tickets] - [Tickets por Angente ALLSELECTED]",
+            "formatString": "0",
+            "lineageTag": "e9fab19c-1caa-493c-9df3-93d71ea8fbb7"
+          },
+          {
+            "name": "Tickets por Agente Var Grupo",
+            "expression": "IF([Tickets por Agente Variacion]>=0,\"Arriba de promedio\",\"Debajo de promedio\")",
+            "lineageTag": "5cc2e4b6-c499-4f2b-8f18-de5efd1bc43c"
+          },
+          {
+            "name": "Rank Tickets",
+            "expression": "RANKX(ALL(d_Agentes),[Total Tickets])",
+            "formatString": "0",
+            "lineageTag": "7b6afd5d-565e-411f-8fd9-22de9acda4c1"
+          },
+          {
+            "name": "Rank Tickets ALLS",
+            "expression": "RANKX(ALLSELECTED(d_Agentes),[Total Tickets])",
+            "formatString": "0",
+            "lineageTag": "b7d8390e-a384-4c7a-8e2a-d8842d411fca"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DAX Medidas",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i44FAA==\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Column1\", type text}}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Changed Type\",{\"Column1\"})",
+                "in",
+                "    #\"Removed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "d_Satisfacción",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Satisfacción",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "658f787b-47d9-454d-a3f9-e617615f51ad",
+            "sourceColumn": "Satisfacción",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Satifacción Grupo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "SortByColumn"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "813f9bbd-9d1e-4618-b640-ea3f29ce5404",
+            "sortByColumn": "Satisfacción",
+            "sourceColumn": "Satifacción Grupo",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Estatus",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c2cef039-c309-490e-9f93-ef9ad6bed4f0",
+            "sourceColumn": "Estatus",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Rating",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "97660355-1794-4647-930f-1534dbbf9a58",
+            "sourceColumn": "Rating",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "97079145-c638-4269-96d4-5f3f2f5bb0c7",
+        "partitions": [
+          {
+            "name": "d_Satisfacción",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i45WMlTSUXJJTU4tSM7Mz0vMK0kF8v1S0xNLMsvygcxHaye839GvFKsTrWQE5Pom5uRjU4CkzBgoGJSaXpqTWIRbJZJ6E6CUU2lqHkhJQH5xJk7VSHpMgQpcK5JTc1IhDiZCH0x3LAA=\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Satisdacción = _t, #\"Satifacción Grupo\" = _t, Estatus = _t, Rating = _t]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Satisdacción\", Int64.Type}, {\"Satifacción Grupo\", type text}, {\"Estatus\", type text}, {\"Rating\", type text}}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Changed Type\",{{\"Satisdacción\", \"Satisfacción\"}})",
+                "in",
+                "    #\"Renamed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "d_Días",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Días Abierto",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "65e33b70-f1bc-4916-ad2c-5ddc97e14d67",
+            "sourceColumn": "Días Abierto",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Días Abierto Grupo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "SortByColumn"
+              }
+            ],
+            "dataType": "string",
+            "expression": [
+              "",
+              "IF('d_Días'[Días Abierto] <= 1,\"0-1 días\",",
+              "IF('d_Días'[Días Abierto] <= 5,\"2-5 días\",",
+              "IF('d_Días'[Días Abierto] <= 9,\"6-5 días\",",
+              "\"+10 días\")))"
+            ],
+            "isDataTypeInferred": true,
+            "lineageTag": "0c4346e4-c1f4-488b-807b-59d6920be3ab",
+            "sortByColumn": "Días orden",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Días orden",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "expression": [
+              "",
+              "IF('d_Días'[Días Abierto] <= 1,1,",
+              "IF('d_Días'[Días Abierto] <= 5,2,",
+              "IF('d_Días'[Días Abierto] <= 9,3,",
+              "4)))"
+            ],
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "lineageTag": "051281a5-b7e3-4fcb-b9d5-8679fae80056",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "lineageTag": "f7b3726d-3f47-4f2d-8aec-c8806ac7dcc1",
+        "partitions": [
+          {
+            "name": "d_Días",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = f_Tickets[Días Resolución],",
+                "    #\"Removed Duplicates\" = List.Distinct(Source),",
+                "    #\"Sorted Items\" = List.Sort(#\"Removed Duplicates\",Order.Ascending),",
+                "    #\"Converted to Table\" = Table.FromList(#\"Sorted Items\", Splitter.SplitByNothing(), null, null, ExtraValues.Error),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Converted to Table\",{{\"Column1\", Int64.Type}}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Changed Type\",{{\"Column1\", \"Días Abierto\"}})",
+                "in",
+                "    #\"Renamed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "LocalDateTable_eaa8a7a0-ab64-4bea-9543-020984fca85a",
+        "annotations": [
+          {
+            "name": "__PBI_LocalDateTable",
+            "value": "true"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "2eea216c-01f4-435b-a9ee-bbd733dca2b7",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "isHidden": true,
+            "lineageTag": "0ea5db51-08d0-4967-8902-7774ae4105b2",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "isHidden": true,
+            "lineageTag": "11418061-7c3b-467f-9228-e62831ee85f4",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "45a99ba2-183d-49e0-9b55-c46b24c9337b",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "isHidden": true,
+            "lineageTag": "9a5bc60b-3adb-4911-9db8-117e0dd14242",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "71b3165b-9220-491b-ad3f-71f9906adfb8",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "isHidden": true,
+            "lineageTag": "68ad1e8c-40cd-4143-afeb-d603d4b73f3f",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "129366cf-a629-4154-b424-dffba777e95c",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "fa2429f3-3d14-4b40-b209-d1ddb5d1b165",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "6c4cc847-7ed2-42ab-8e2f-2e1b4f2d2c1e",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "e0037d50-f78c-4685-b91e-f476ea7ecd2d",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "f7f5c1c0-94ec-416a-a37d-fc3f5cd7389f"
+          }
+        ],
+        "isHidden": true,
+        "lineageTag": "302b0bfd-17ef-4e78-83e7-e47b9a8279b1",
+        "partitions": [
+          {
+            "name": "LocalDateTable_eaa8a7a0-ab64-4bea-9543-020984fca85a",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(Year(MIN('d_Agentes'[Fecha de Nacimiento])), 1, 1), Date(Year(MAX('d_Agentes'[Fecha de Nacimiento])), 12, 31))",
+              "type": "calculated"
+            }
+          }
+        ],
+        "showAsVariationsOnly": true
+      }
+    ]
+  }
+}

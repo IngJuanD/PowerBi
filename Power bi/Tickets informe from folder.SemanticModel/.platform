@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Tickets informe from folder"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "f4b3e407-ed07-4de7-afc3-80c6a6a98cc1"
+  }
+}
