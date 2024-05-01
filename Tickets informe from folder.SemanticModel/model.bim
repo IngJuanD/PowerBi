@@ -61,11 +61,11 @@
           }
         ],
         "expression": [
-          "let",
-          "    Source = Excel.Workbook(Parameter1, null, true),",
-          "    TicketsTI_Sheet = Source{[Item=\"TicketsTI\",Kind=\"Sheet\"]}[Data],",
-          "    #\"Promoted Headers\" = Table.PromoteHeaders(TicketsTI_Sheet, [PromoteAllScalars=true])",
-          "in",
+          "let\r",
+          "    Source = Excel.Workbook(Parameter1, null, true),\r",
+          "    TicketsTI_Sheet = Source{[Item=\"TicketsTI\",Kind=\"Sheet\"]}[Data],\r",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(TicketsTI_Sheet, [PromoteAllScalars=true])\r",
+          "in\r",
           "    #\"Promoted Headers\""
         ],
         "kind": "m",
@@ -85,10 +85,10 @@
           }
         ],
         "expression": [
-          "let",
-          "    Source = Folder.Files(\"G:\\CURSO POWER BI\\POWER BI\\DATOS\\Tickets\"),",
-          "    Navigation1 = Source{0}[Content]",
-          "in",
+          "let\r",
+          "    Source = Folder.Files(\"G:\\CURSO POWER BI\\POWER BI\\DATOS\\Tickets\"),\r",
+          "    Navigation1 = Source{0}[Content]\r",
+          "in\r",
           "    Navigation1"
         ],
         "kind": "m",
@@ -106,11 +106,11 @@
         "expression": [
           "let",
           "    Source = (Parameter1 as binary) => let",
-          "    Source = Excel.Workbook(Parameter1, null, true),",
-          "    TicketsTI_Sheet = Source{[Item=\"TicketsTI\",Kind=\"Sheet\"]}[Data],",
-          "    #\"Promoted Headers\" = Table.PromoteHeaders(TicketsTI_Sheet, [PromoteAllScalars=true])",
-          "in",
-          "    #\"Promoted Headers\"",
+          "        Source = Excel.Workbook(Parameter1, null, true),",
+          "        TicketsTI_Sheet = Source{[Item=\"TicketsTI\",Kind=\"Sheet\"]}[Data],",
+          "        #\"Promoted Headers\" = Table.PromoteHeaders(TicketsTI_Sheet, [PromoteAllScalars=true])",
+          "    in",
+          "        #\"Promoted Headers\"",
           "in",
           "    Source"
         ],
@@ -132,17 +132,17 @@
           }
         ],
         "expression": [
-          "let",
-          "    Source = Excel.Workbook(File.Contents(\"G:\\CURSO POWER BI\\POWER BI\\DATOS\\Lista+Empleados.xlsx\"), null, true),",
-          "    #\"Planta 2_Sheet\" = Source{[Item=\"Planta 2\",Kind=\"Sheet\"]}[Data],",
-          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Planta 2_Sheet\", [PromoteAllScalars=true]),",
-          "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"Turno\", type text}, {\"Lista de empleados de la planta 2\", type any}, {\"Column3\", type text}, {\"Column4\", type text}, {\"Column5\", type text}, {\"Column6\", type text}, {\"Column7\", type any}, {\"Column8\", type text}, {\"Column9\", type date}}),",
-          "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Changed Type\",{\"Turno\", \"Lista de empleados de la planta 2\", \"Column3\", \"Column4\", \"Column5\", \"Column6\"}),",
-          "    #\"Removed Top Rows\" = Table.Skip(#\"Removed Other Columns\",5),",
-          "    #\"Promoted Headers1\" = Table.PromoteHeaders(#\"Removed Top Rows\", [PromoteAllScalars=true]),",
-          "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Promoted Headers1\",{{\"Turno\", type text}, {\"ID Empleado\", Int64.Type}, {\"Apellido\", type text}, {\"Nombre\", type text}, {\"ID Puesto\", type text}, {\"Email\", type text}}),",
-          "    #\"Added Custom\" = Table.AddColumn(#\"Changed Type1\", \"Planta\", each \"2\")",
-          "in",
+          "let\r",
+          "    Source = Excel.Workbook(File.Contents(\"G:\\CURSO POWER BI\\POWER BI\\DATOS\\Lista+Empleados.xlsx\"), null, true),\r",
+          "    #\"Planta 2_Sheet\" = Source{[Item=\"Planta 2\",Kind=\"Sheet\"]}[Data],\r",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Planta 2_Sheet\", [PromoteAllScalars=true]),\r",
+          "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"Turno\", type text}, {\"Lista de empleados de la planta 2\", type any}, {\"Column3\", type text}, {\"Column4\", type text}, {\"Column5\", type text}, {\"Column6\", type text}, {\"Column7\", type any}, {\"Column8\", type text}, {\"Column9\", type date}}),\r",
+          "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Changed Type\",{\"Turno\", \"Lista de empleados de la planta 2\", \"Column3\", \"Column4\", \"Column5\", \"Column6\"}),\r",
+          "    #\"Removed Top Rows\" = Table.Skip(#\"Removed Other Columns\",5),\r",
+          "    #\"Promoted Headers1\" = Table.PromoteHeaders(#\"Removed Top Rows\", [PromoteAllScalars=true]),\r",
+          "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Promoted Headers1\",{{\"Turno\", type text}, {\"ID Empleado\", Int64.Type}, {\"Apellido\", type text}, {\"Nombre\", type text}, {\"ID Puesto\", type text}, {\"Email\", type text}}),\r",
+          "    #\"Added Custom\" = Table.AddColumn(#\"Changed Type1\", \"Planta\", each \"2\")\r",
+          "in\r",
           "    #\"Added Custom\""
         ],
         "kind": "m",
@@ -161,17 +161,17 @@
           }
         ],
         "expression": [
-          "let",
-          "    Source = Excel.Workbook(File.Contents(\"G:\\CURSO POWER BI\\POWER BI\\DATOS\\Lista+Empleados.xlsx\"), null, true),",
-          "    #\"Planta 1_Sheet\" = Source{[Item=\"Planta 1\",Kind=\"Sheet\"]}[Data],",
-          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Planta 1_Sheet\", [PromoteAllScalars=true]),",
-          "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"Turno\", type text}, {\"Lista de empleados de la planta 1\", type any}, {\"Column3\", type text}, {\"Column4\", type text}, {\"Column5\", type text}, {\"Column6\", type text}, {\"Column7\", type any}, {\"Column8\", type text}, {\"Column9\", type date}}),",
-          "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Changed Type\",{\"Turno\", \"Lista de empleados de la planta 1\", \"Column3\", \"Column4\", \"Column5\", \"Column6\"}),",
-          "    #\"Removed Top Rows\" = Table.Skip(#\"Removed Other Columns\",5),",
-          "    #\"Promoted Headers1\" = Table.PromoteHeaders(#\"Removed Top Rows\", [PromoteAllScalars=true]),",
-          "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Promoted Headers1\",{{\"Turno\", type text}, {\"ID Empleado\", Int64.Type}, {\"Apellido\", type text}, {\"Nombre\", type text}, {\"ID Puesto\", type text}, {\"Email\", type text}}),",
-          "    #\"Added Custom\" = Table.AddColumn(#\"Changed Type1\", \"Planta\", each \"1\")",
-          "in",
+          "let\r",
+          "    Source = Excel.Workbook(File.Contents(\"G:\\CURSO POWER BI\\POWER BI\\DATOS\\Lista+Empleados.xlsx\"), null, true),\r",
+          "    #\"Planta 1_Sheet\" = Source{[Item=\"Planta 1\",Kind=\"Sheet\"]}[Data],\r",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Planta 1_Sheet\", [PromoteAllScalars=true]),\r",
+          "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"Turno\", type text}, {\"Lista de empleados de la planta 1\", type any}, {\"Column3\", type text}, {\"Column4\", type text}, {\"Column5\", type text}, {\"Column6\", type text}, {\"Column7\", type any}, {\"Column8\", type text}, {\"Column9\", type date}}),\r",
+          "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Changed Type\",{\"Turno\", \"Lista de empleados de la planta 1\", \"Column3\", \"Column4\", \"Column5\", \"Column6\"}),\r",
+          "    #\"Removed Top Rows\" = Table.Skip(#\"Removed Other Columns\",5),\r",
+          "    #\"Promoted Headers1\" = Table.PromoteHeaders(#\"Removed Top Rows\", [PromoteAllScalars=true]),\r",
+          "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Promoted Headers1\",{{\"Turno\", type text}, {\"ID Empleado\", Int64.Type}, {\"Apellido\", type text}, {\"Nombre\", type text}, {\"ID Puesto\", type text}, {\"Email\", type text}}),\r",
+          "    #\"Added Custom\" = Table.AddColumn(#\"Changed Type1\", \"Planta\", each \"1\")\r",
+          "in\r",
           "    #\"Added Custom\""
         ],
         "kind": "m",
@@ -190,12 +190,12 @@
           }
         ],
         "expression": [
-          "let",
-          "    Source = Excel.Workbook(File.Contents(\"G:\\CURSO POWER BI\\POWER BI\\DATOS\\Puestos.xlsx\"), null, true),",
-          "    Tabla1_Table = Source{[Item=\"Tabla1\",Kind=\"Table\"]}[Data],",
-          "    #\"Changed Type\" = Table.TransformColumnTypes(Tabla1_Table,{{\"ID Puesto\", type text}, {\"Puesto\", type text}, {\"Departamento\", type text}, {\"Tipo Puesto\", type text}}),",
-          "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Changed Type\",{{\"Departamento\", Text.Proper, type text}})",
-          "in",
+          "let\r",
+          "    Source = Excel.Workbook(File.Contents(\"G:\\CURSO POWER BI\\POWER BI\\DATOS\\Puestos.xlsx\"), null, true),\r",
+          "    Tabla1_Table = Source{[Item=\"Tabla1\",Kind=\"Table\"]}[Data],\r",
+          "    #\"Changed Type\" = Table.TransformColumnTypes(Tabla1_Table,{{\"ID Puesto\", type text}, {\"Puesto\", type text}, {\"Departamento\", type text}, {\"Tipo Puesto\", type text}}),\r",
+          "    #\"Capitalized Each Word\" = Table.TransformColumns(#\"Changed Type\",{{\"Departamento\", Text.Proper, type text}})\r",
+          "in\r",
           "    #\"Capitalized Each Word\""
         ],
         "kind": "m",
@@ -214,17 +214,17 @@
           }
         ],
         "expression": [
-          "let",
-          "    Source = Excel.Workbook(Web.Contents(\"https://docs.google.com/spreadsheets/d/e/2PACX-1vSsUO5PgOZBolseJmcRId0rTQN6ybuLN8Q99gLOWJtZbIrsWWMEskKvsiUFZTxwcvXe9GZ_r3J5RbEu/pub?output=xlsx\"), null, true),",
-          "    Sheet1_Sheet = Source{[Item=\"Sheet1\",Kind=\"Sheet\"]}[Data],",
-          "    #\"Promoted Headers\" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),",
-          "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"ID Agente\", Int64.Type}, {\"URL Dropbox\", type text}, {\"Genero\", type text}}),",
-          "    #\"Inserted Text Before Delimiter\" = Table.AddColumn(#\"Changed Type\", \"Text Before Delimiter\", each Text.BeforeDelimiter([URL Dropbox], \"?dl=0\"), type text),",
-          "    #\"Replaced Value\" = Table.ReplaceValue(#\"Inserted Text Before Delimiter\",\"www\",\"dl\",Replacer.ReplaceText,{\"Text Before Delimiter\"}),",
-          "    #\"Renamed Columns\" = Table.RenameColumns(#\"Replaced Value\",{{\"Text Before Delimiter\", \"URL FOTO\"}}),",
-          "    #\"Replaced Value1\" = Table.ReplaceValue(#\"Renamed Columns\",\"M\",\"Mujer\",Replacer.ReplaceText,{\"Genero\"}),",
-          "    #\"Replaced Value2\" = Table.ReplaceValue(#\"Replaced Value1\",\"H\",\"Hombre\",Replacer.ReplaceText,{\"Genero\"})",
-          "in",
+          "let\r",
+          "    Source = Excel.Workbook(Web.Contents(\"https://docs.google.com/spreadsheets/d/e/2PACX-1vSsUO5PgOZBolseJmcRId0rTQN6ybuLN8Q99gLOWJtZbIrsWWMEskKvsiUFZTxwcvXe9GZ_r3J5RbEu/pub?output=xlsx\"), null, true),\r",
+          "    Sheet1_Sheet = Source{[Item=\"Sheet1\",Kind=\"Sheet\"]}[Data],\r",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),\r",
+          "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"ID Agente\", Int64.Type}, {\"URL Dropbox\", type text}, {\"Genero\", type text}}),\r",
+          "    #\"Inserted Text Before Delimiter\" = Table.AddColumn(#\"Changed Type\", \"Text Before Delimiter\", each Text.BeforeDelimiter([URL Dropbox], \"?dl=0\"), type text),\r",
+          "    #\"Replaced Value\" = Table.ReplaceValue(#\"Inserted Text Before Delimiter\",\"www\",\"dl\",Replacer.ReplaceText,{\"Text Before Delimiter\"}),\r",
+          "    #\"Renamed Columns\" = Table.RenameColumns(#\"Replaced Value\",{{\"Text Before Delimiter\", \"URL FOTO\"}}),\r",
+          "    #\"Replaced Value1\" = Table.ReplaceValue(#\"Renamed Columns\",\"M\",\"Mujer\",Replacer.ReplaceText,{\"Genero\"}),\r",
+          "    #\"Replaced Value2\" = Table.ReplaceValue(#\"Replaced Value1\",\"H\",\"Hombre\",Replacer.ReplaceText,{\"Genero\"})\r",
+          "in\r",
           "    #\"Replaced Value2\""
         ],
         "kind": "m",
@@ -304,10 +304,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "columns": [
@@ -704,10 +700,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "columns": [
