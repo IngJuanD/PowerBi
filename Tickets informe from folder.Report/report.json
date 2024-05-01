@@ -6,8 +6,7 @@
       "boundSection": "ReportSectioneefca77b222fa18e527c",
       "config": "{}",
       "name": "Pod",
-      "parameters": "[{\"name\":\"Param_Filter653e6b814193a59eda76\",\"boundFilter\":\"Filter653e6b814193a59eda76\",\"fieldExpr\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"d_Agentes\"}},\"Property\":\"Nombre\"}}}]",
-      "type": 1
+      "type": 2
     },
     {
       "boundSection": "ReportSection9212ac56a958fc610ce8",
@@ -917,7 +916,7 @@
           "z": 2.00
         },
         {
-          "config": "{\"name\":\"e681a5501469ed88b97e\",\"layouts\":[{\"id\":0,\"position\":{\"x\":9.634408602150538,\"y\":0,\"z\":0,\"width\":472.0860215053763,\"height\":523.010752688172,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"DAX Medidas.Rank Final\"},{\"queryRef\":\"d_Agentes.URL FOTO\"},{\"queryRef\":\"d_Agentes.Nombre\"},{\"queryRef\":\"d_Agentes.Genero\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"d_Agentes\",\"Type\":0},{\"Name\":\"d1\",\"Entity\":\"DAX Medidas\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Nombre\"},\"Name\":\"d_Agentes.Nombre\",\"NativeReferenceName\":\"Nombre\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"URL FOTO\"},\"Name\":\"d_Agentes.URL FOTO\",\"NativeReferenceName\":\"URL FOTO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Genero\"},\"Name\":\"d_Agentes.Genero\",\"NativeReferenceName\":\"Genero\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d1\"}},\"Property\":\"Rank Final\"},\"Name\":\"DAX Medidas.Rank Final\",\"NativeReferenceName\":\"Rank Final\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d1\"}},\"Property\":\"Rank Final\"}}}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"values\":[{\"properties\":{\"urlIcon\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}},{\"properties\":{\"webURL\":{\"expr\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"FotosAgentes\"}},\"Property\":\"URL Dropbox\"}},\"Function\":3}}}},\"selector\":{\"data\":[{\"dataViewWildcard\":{\"matchingOption\":1}}],\"metadata\":\"d_Agentes.Nombre\"}}]}}}",
+          "config": "{\"name\":\"e681a5501469ed88b97e\",\"layouts\":[{\"id\":0,\"position\":{\"x\":9.634408602150538,\"y\":0,\"z\":0,\"width\":472.0860215053763,\"height\":523.010752688172,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"DAX Medidas.Rank Final\"},{\"queryRef\":\"d_Agentes.URL FOTO\"},{\"queryRef\":\"d_Agentes.Nombre\"},{\"queryRef\":\"d_Agentes.Genero\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"d_Agentes\",\"Type\":0},{\"Name\":\"d1\",\"Entity\":\"DAX Medidas\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Nombre\"},\"Name\":\"d_Agentes.Nombre\",\"NativeReferenceName\":\"Nombre\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"URL FOTO\"},\"Name\":\"d_Agentes.URL FOTO\",\"NativeReferenceName\":\"URL FOTO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Genero\"},\"Name\":\"d_Agentes.Genero\",\"NativeReferenceName\":\"Genero\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d1\"}},\"Property\":\"Rank Final\"},\"Name\":\"DAX Medidas.Rank Final\",\"NativeReferenceName\":\"Rank Final\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d1\"}},\"Property\":\"Rank Final\"}}}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"values\":[{\"properties\":{\"urlIcon\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}},{\"properties\":{\"webURL\":{\"expr\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"FotosAgentes\"}},\"Property\":\"URL Dropbox\"}},\"Function\":3}}}},\"selector\":{\"data\":[{\"dataViewWildcard\":{\"matchingOption\":1}}],\"metadata\":\"d_Agentes.Nombre\"}}]},\"vcObjects\":{\"visualTooltip\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"section\":{\"expr\":{\"Literal\":{\"Value\":\"'ReportSectioneefca77b222fa18e527c'\"}}}}}]}}}",
           "filters": "[]",
           "height": 523.01,
           "width": 472.09,
@@ -986,52 +985,43 @@
       "width": 1280.00
     },
     {
-      "config": "{}",
+      "config": "{\"type\":1}",
       "displayName": "Detalle Ranking",
-      "displayOption": 1,
-      "filters": "[{\"name\":\"Filterdcb8e63c38f1fba073e8\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"d_Agentes\"}},\"Property\":\"Nombre\"}},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{\"general\":[{\"properties\":{}}]}},{\"name\":\"Filter653e6b814193a59eda76\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"d_Agentes\"}},\"Property\":\"Nombre\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"d_Agentes\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Nombre\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'GUADALUPE TORRICO'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":5}]",
-      "height": 720.00,
+      "displayOption": 3,
+      "filters": "[{\"name\":\"Filterdcb8e63c38f1fba073e8\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"d_Agentes\"}},\"Property\":\"Nombre\"}},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{\"general\":[{\"properties\":{}}]}}]",
+      "height": 230.00,
       "name": "ReportSectioneefca77b222fa18e527c",
       "ordinal": 9,
       "visualContainers": [
         {
-          "config": "{\"name\":\"1629434d2e99797e1b60\",\"layouts\":[{\"id\":0,\"position\":{\"x\":180.30107526881721,\"y\":185.80645161290323,\"z\":1,\"width\":202.32258064516128,\"height\":180.30107526881721,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"multiRowCard\",\"projections\":{\"Values\":[{\"queryRef\":\"DAX Medidas.Total Tickets\"},{\"queryRef\":\"DAX Medidas.Promedio Días Abierto\"},{\"queryRef\":\"DAX Medidas.Promedio Sastifacción\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"DAX Medidas\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Total Tickets\"},\"Name\":\"DAX Medidas.Total Tickets\",\"NativeReferenceName\":\"Total Tickets\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Promedio Días Abierto\"},\"Name\":\"DAX Medidas.Promedio Días Abierto\",\"NativeReferenceName\":\"Promedio Días Abierto\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Promedio Sastifacción\"},\"Name\":\"DAX Medidas.Promedio Sastifacción\",\"NativeReferenceName\":\"Promedio Sastifacción\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Total Tickets\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"categoryLabels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"card\":[{\"properties\":{\"barShow\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"cardPadding\":{\"expr\":{\"Literal\":{\"Value\":\"20D\"}}}}}]},\"vcObjects\":{\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "config": "{\"name\":\"1629434d2e99797e1b60\",\"layouts\":[{\"id\":0,\"position\":{\"x\":191.61290322580643,\"y\":3.225806451612903,\"z\":1,\"width\":202.5806451612903,\"height\":180,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"multiRowCard\",\"projections\":{\"Values\":[{\"queryRef\":\"DAX Medidas.Total Tickets\"},{\"queryRef\":\"DAX Medidas.Promedio Días Abierto\"},{\"queryRef\":\"DAX Medidas.Promedio Sastifacción\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"DAX Medidas\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Total Tickets\"},\"Name\":\"DAX Medidas.Total Tickets\",\"NativeReferenceName\":\"Total Tickets\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Promedio Días Abierto\"},\"Name\":\"DAX Medidas.Promedio Días Abierto\",\"NativeReferenceName\":\"Promedio Días Abierto\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Promedio Sastifacción\"},\"Name\":\"DAX Medidas.Promedio Sastifacción\",\"NativeReferenceName\":\"Promedio Sastifacción\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Total Tickets\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"categoryLabels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"card\":[{\"properties\":{\"barShow\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"cardPadding\":{\"expr\":{\"Literal\":{\"Value\":\"20D\"}}}}}]},\"vcObjects\":{\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
           "filters": "[]",
-          "height": 180.30,
-          "width": 202.32,
-          "x": 180.30,
-          "y": 185.81,
+          "height": 180.00,
+          "width": 202.58,
+          "x": 191.61,
+          "y": 3.23,
           "z": 1.00
         },
         {
-          "config": "{\"name\":\"528f08ff8ab76b9f1da6\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1179.52688172043,\"y\":0,\"z\":3,\"width\":100.47311827956989,\"height\":39.913978494623656}}],\"singleVisual\":{\"visualType\":\"actionButton\",\"drillFilterOtherVisuals\":true,\"objects\":{\"icon\":[{\"properties\":{\"shapeType\":{\"expr\":{\"Literal\":{\"Value\":\"'back'\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'Back'\"}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "config": "{\"name\":\"d0116bab78080701502c\",\"layouts\":[{\"id\":0,\"position\":{\"x\":10.96774193548387,\"y\":3.225806451612903,\"z\":0,\"width\":180.64516129032256,\"height\":180,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"multiRowCard\",\"projections\":{\"Values\":[{\"queryRef\":\"d_Agentes.Nombre\"},{\"queryRef\":\"DAX Medidas.Rank Tickets\"},{\"queryRef\":\"DAX Medidas.Rank Satisfaccion\"},{\"queryRef\":\"DAX Medidas.Rank Días\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"d_Agentes\",\"Type\":0},{\"Name\":\"d1\",\"Entity\":\"DAX Medidas\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Nombre\"},\"Name\":\"d_Agentes.Nombre\",\"NativeReferenceName\":\"Nombre\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d1\"}},\"Property\":\"Rank Días\"},\"Name\":\"DAX Medidas.Rank Días\",\"NativeReferenceName\":\"Rank Días\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d1\"}},\"Property\":\"Rank Satisfaccion\"},\"Name\":\"DAX Medidas.Rank Satisfaccion\",\"NativeReferenceName\":\"Rank Satisfaccion\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d1\"}},\"Property\":\"Rank Tickets\"},\"Name\":\"DAX Medidas.Rank Tickets\",\"NativeReferenceName\":\"Rank Tickets\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Nombre\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"vcObjects\":{\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
           "filters": "[]",
-          "height": 39.91,
-          "width": 100.47,
-          "x": 1179.53,
-          "y": 0.00,
-          "z": 3.00
-        },
-        {
-          "config": "{\"name\":\"d0116bab78080701502c\",\"layouts\":[{\"id\":0,\"position\":{\"x\":11.010752688172044,\"y\":13.763440860215054,\"z\":0,\"width\":180.30107526881721,\"height\":524.3870967741935,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"multiRowCard\",\"projections\":{\"Values\":[{\"queryRef\":\"d_Agentes.Nombre\"},{\"queryRef\":\"DAX Medidas.Rank Tickets\"},{\"queryRef\":\"DAX Medidas.Rank Satisfaccion\"},{\"queryRef\":\"DAX Medidas.Rank Días\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"d_Agentes\",\"Type\":0},{\"Name\":\"d1\",\"Entity\":\"DAX Medidas\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Nombre\"},\"Name\":\"d_Agentes.Nombre\",\"NativeReferenceName\":\"Nombre\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d1\"}},\"Property\":\"Rank Días\"},\"Name\":\"DAX Medidas.Rank Días\",\"NativeReferenceName\":\"Rank Días\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d1\"}},\"Property\":\"Rank Satisfaccion\"},\"Name\":\"DAX Medidas.Rank Satisfaccion\",\"NativeReferenceName\":\"Rank Satisfaccion\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d1\"}},\"Property\":\"Rank Tickets\"},\"Name\":\"DAX Medidas.Rank Tickets\",\"NativeReferenceName\":\"Rank Tickets\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Nombre\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"vcObjects\":{\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
-          "filters": "[]",
-          "height": 524.39,
-          "width": 180.30,
-          "x": 11.01,
-          "y": 13.76,
+          "height": 180.00,
+          "width": 180.65,
+          "x": 10.97,
+          "y": 3.23,
           "z": 0.00
         },
         {
-          "config": "{\"name\":\"da6e024c6831fbf70da1\",\"layouts\":[{\"id\":0,\"position\":{\"x\":191.31182795698925,\"y\":13.763440860215054,\"z\":2,\"width\":180.30107526881721,\"height\":172.04301075268816,\"tabOrder\":2}}],\"singleVisual\":{\"visualType\":\"simpleImageEBC4593F96F1425FB3D84C5BF02B5075\",\"projections\":{\"imageURL\":[{\"queryRef\":\"d_Agentes.URL FOTO\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"d_Agentes\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"URL FOTO\"},\"Name\":\"d_Agentes.URL FOTO\",\"NativeReferenceName\":\"URL FOTO\"}]},\"drillFilterOtherVisuals\":true}}",
+          "config": "{\"name\":\"da6e024c6831fbf70da1\",\"layouts\":[{\"id\":0,\"position\":{\"x\":394.19354838709677,\"y\":3.225806451612903,\"z\":2,\"width\":180,\"height\":180,\"tabOrder\":2}}],\"singleVisual\":{\"visualType\":\"simpleImageEBC4593F96F1425FB3D84C5BF02B5075\",\"projections\":{\"imageURL\":[{\"queryRef\":\"d_Agentes.URL FOTO\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"d_Agentes\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"URL FOTO\"},\"Name\":\"d_Agentes.URL FOTO\",\"NativeReferenceName\":\"URL FOTO\"}]},\"drillFilterOtherVisuals\":true}}",
           "filters": "[]",
-          "height": 172.04,
-          "width": 180.30,
-          "x": 191.31,
-          "y": 13.76,
+          "height": 180.00,
+          "width": 180.00,
+          "x": 394.19,
+          "y": 3.23,
           "z": 2.00
         }
       ],
-      "width": 1280.00
+      "width": 600.00
     }
   ],
   "theme": "CY23SU0217799445424787064.json"
